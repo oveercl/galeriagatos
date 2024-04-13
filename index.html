@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Galeria de Gatitos</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            scroll-behavior: smooth; /* Suaviza el desplazamiento */
+        }
+
+        /* Paleta de colores */
+        :root {
+            --barn-red: hsla(0, 100%, 24%, 1);
+            --fire-brick: hsla(356, 83%, 41%, 1);
+            --papaya-whip: hsla(40, 91%, 91%, 1);
+            --prussian-blue: hsla(201, 100%, 14%, 1);
+            --air-superiority-blue: hsla(203, 39%, 57%, 1);
+        }
+
+        header {
+            background-color: var(--prussian-blue);
+            color: var(--papaya-whip);
+            padding: 20px;
+            position: fixed;
+            width: 100%;
+            z-index: 1000; /* Asegura que el encabezado esté sobre el contenido */
+        }
+
+        /* Centra el título del encabezado */
+        header h1 {
+            text-align: center;
+        }
+
+        nav ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+        }
+
+        nav ul li {
+            display: inline;
+            margin-right: 20px;
+        }
+
+        nav ul li a {
+            color: var(--papaya-whip);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        nav ul li a:hover {
+            color: var(--fire-brick); /* Cambia el color al pasar el ratón */
+        }
+
+        main {
+            padding-top: 60px; /* Ajusta el margen superior para que no se solape con el encabezado */
+        }
+
+        section {
+            display: none; /* Oculta todas las secciones por defecto */
+            padding: 50px 20px;
+            text-align: center;
+        }
+
+        /* Ajuste para las secciones */
+        section {
+            margin-top: 100px; /* Ajusta el margen superior para que el encabezado no obstruya el contenido */
+        }
+
+        footer {
+            background-color: var(--prussian-blue);
+            color: var(--papaya-whip);
+            padding: 20px;
+            text-align: center;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+
+        /* Oculta el pie de página si no hay suficiente contenido */
+        body {
+            margin-bottom: 150px; /* Ajusta según la altura de tu pie de página */
+        }
+
+        .gallery-images {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+        }
+
+        .gallery-images img {
+            display: block;
+            width: 100%;
+            height: auto;
+            border-radius: 5px;
+        }
+
+        .gallery-images .image-container {
+            position: relative;
+        }
+
+        .gallery-images .image-description {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            color: var(--papaya-whip);
+            padding: 5px;
+            text-align: center;
+            border-bottom-left-radius: 5px;
+            border-bottom-right-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+<header>
+    <h1>Galeria de gatitos adorables</h1>
+    <nav>
+        <ul>
+            <li><a href="#inicio" onclick="mostrarSeccion('inicio')">Inicio</a></li>
+            <li><a href="#galeria" onclick="mostrarSeccion('galeria')">Galería</a></li>
+            <li><a href="#contacto" onclick="mostrarSeccion('contacto')">Contacto</a></li>
+        </ul>
+    </nav>
+</header>
+
+<main>
+    <section id="inicio">
+        <h2 style="color: var(--barn-red);">¡Bienvenido!</h2>
+        <p>¡En esta galeria podrás ver algunos gatitos adorables!</p>
+    </section>
+
+    <section id="galeria">
+        <h2 style="color: var(--barn-red);">Galería de Gatitos</h2>
+        <div class="gallery-images">
+            <div class="image-container">
+                <img src="gato1.jpg" alt="Gatito 1">
+                <div class="image-description">¡Un gatito lavándose para irse a dormir!</div>
+            </div>
+            <div class="image-container">
+                <img src="gato2.jpg" alt="Gatito 2">
+                <div class="image-description">¡Este gatito es todo un amor!</div>
+            </div>
+            <div class="image-container">
+                <img src="gato3.jpg" alt="Gatito 3">
+                <div class="image-description">¡Un gatito con una mirada curiosa!</div>
+            </div>
+            <!-- Agrega más imágenes según sea necesario -->
+        </div>
+    </section>
+
+    <section id="contacto">
+        <h2 style="color: var(--barn-red);">Contacto</h2>
+        <p>¡Contáctanos si deseas obtener más imagenes de nuestros adorables gatitos!</p>
+        <form action="submit_form.php" method="post">
+            <label for="name">Nombre:</label>
+            <input type="text" id="name" name="name" required><br>
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required><br>
+            <label for="message">Mensaje:</label><br>
+            <textarea id="message" name="message" rows="4" cols="50" required></textarea><br>
+            <button type="submit">Enviar</button>
+        </form>
+    </section>
+</main>
+
+<footer>
+    <p>&copy; 2024 Gatitos Adorables. Todos los derechos reservados.</p>
+</footer>
+
+<script>
+    function mostrarSeccion(id) {
+        // Oculta todas las secciones
+        var secciones = document.querySelectorAll('section');
+        secciones.forEach(function(seccion) {
+            seccion.style.display = 'none';
+        });
+
+        // Muestra la sección correspondiente al ID dado
+        var seccionAMostrar = document.getElementById(id);
+        seccionAMostrar.style.display = 'block';
+    }
+</script>
+</body>
+</html>
